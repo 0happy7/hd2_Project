@@ -1,0 +1,408 @@
+    /* 메인 영역의 헤더 : 어떤 게시판인지 또는 어떤 기능을 하는 곳인지 표시 */
+    #head {
+        margin-top: 40px;
+        margin-bottom: 2%;
+        text-align: center;
+        font-size: 35px;
+        color: rgb(110, 104, 104);
+        border-bottom: 1px rgb(196, 190, 190) solid;
+        padding: 1%;
+    }
+    /* 메인 영역 */
+    #main {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    /* 관리자 페이지 */
+    /* 마이 페이지 body 테이블  */
+    .mypage_table{
+        width: 100%;
+    }
+    /* 측면 목록 */
+    .mypage_table_ftd{
+        width: 15%;
+        height: 30px;
+        vertical-align: top;
+        white-space: nowrap;
+    }
+    .mypage_table_li{
+        font-size: 25px;
+        color: black;
+        text-decoration: none;
+        list-style: none;
+        font-weight: bolder;
+    }
+
+    .mypage_table .mypage_table_ftd>a{
+        font-size: 25px;
+        color: black;
+        text-decoration: none;
+        font-weight: bolder;
+    }
+    .mypage_table_uli{
+        font-size: 18px;
+        color: black;
+        margin-left: 35px;
+        margin-top: 10px;
+    }
+    .mypage_table_uli a{
+        color: black;
+        text-decoration: none;
+    }
+
+    .mypage_table_maintd{
+        border-left: 1px gray solid;
+        vertical-align: top;
+    }
+    .admin_view_icontent{
+    	margin-left: 30px;
+    	width:80%;
+    	border: 1px solid;
+    	white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    	overflow-x: auto; /* 가로 방향으로 넘칠 경우 스크롤바 생성 */
+    }
+
+    /* 메인 상단 검색창 */
+    .mypage_table_topbox{
+        height: 40px;
+        margin-left: 15px;
+    }
+    .mypage_table_topbox>span{
+        float: left;
+    }
+    .search_box{
+        float:right;
+    }
+    .search_input_box{
+        position: relative;
+    }
+    #searchname{
+        width:100px;
+        height:30px;
+        font-size:20;
+    }
+    .search_text{
+        width: 180px;
+        height: 30px;
+    }
+    .search_img
+    {
+        position : absolute;
+        width:30px;
+        height:30px;
+        border: 0px;
+    }
+    /* 메인 내용 테이블 */
+    .mypage_table_main{
+        margin-left: 15px;
+        width: 100%;
+        border : 1px solid black;
+        border-collapse : collapse;
+        text-align: center;
+    }
+    .mypage_table_main td{
+        height: 50px;
+    }
+    .mypage_table_button{
+        text-align: right;
+    }
+    .mypage_table_button button{
+        width:60px;
+        height:35px;
+        font-size:15px;
+    }
+
+    /* 관리자 정보 페이지 */
+    /* 마이페이지 테이블 */
+    #mypage_table_info {
+        margin-left: auto;
+        margin-right: auto; 
+        margin-top: 50px;
+    }
+
+    /* 마이페이지 입력 폼 */
+    .mypage_input {
+        width: 400px;
+        height: 40px;
+    }
+
+
+    /* 변경 버튼 */
+    .mypage_chang_button {
+        width: 60px;
+        height: 35px;
+        background-color: rgb(199, 192, 192);
+        font-size: 15px;
+        text-align: center;
+        color: black;
+        border: 0px;
+    }
+    .mypage_chang_button:active {
+        background-color: rgb(179, 176, 176);
+    }
+    
+    .mypage_delete_button{
+    	width: 80px;
+        height: 30px;
+        background-color: white;
+        font-size: 15px;
+        text-align: center;
+        color: red;
+        border: 0px;
+        font-weight: bolder;
+    }
+    .mypage_delete_button:active{
+    	background-color: rgb(228, 222, 222);
+    }
+
+    /* 주문관리 상세페이지 */
+    .mypage_table_topbox_ordertext{
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .mypage_table_topbox_order_list{
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 30px;
+    }
+
+    .spage_order_table{
+        width: 80%;
+        height: 200px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_order_table th{
+        background-color: rgb(240, 239, 239);
+        width: 100px;
+    }
+    .spage_order_table td>span{
+        margin-left: 5px;
+    }
+    .spage_order_table_select{
+        width: 100px;
+        height: 30px;
+        margin-left: 5px;
+    }
+    .spage_order_table_input{
+        width: 200px;
+        height: 30px;
+    }
+    .spage_pay_table{
+        width: 80%;
+        height: 200px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_pay_table th{
+        background-color: rgb(240, 239, 239);
+        width: 100px;
+    }
+    .spage_pay_table td>span{
+        margin-left: 5px;
+    }
+    .spage_product_table{
+        width: 80%;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_product_table th{
+        background-color: rgb(240, 239, 239);
+        width: 100px;
+    }
+    .spage_product_table td{
+        text-align: center;
+    }
+    .spage_user_table_box{
+        display: flex;
+    }
+    .spage_user_table{
+        width: 40%;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_user_table th{
+        background-color: rgb(240, 239, 239);
+        width: 100px;
+    }
+    .spage_user_table td>span{
+        margin-left: 5px;
+    }
+    .spage_admin_text{
+        margin-left: 30px;
+        width: 300px;
+    }
+
+    /* 제품등록 */
+    .mypage_table_topbox_writetext{
+        font-size: 25px;
+        font-weight: bolder;
+    }
+
+    .mypage_table_topbox_write_list{
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 30px;
+    }
+    .spage_product_write_group_table{
+        height: 50px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_product_write_group_table th{
+        background-color: rgb(240, 239, 239);
+        width: 150px;
+    }
+    .spage_product_write_group_table_select{
+        width: 120px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .spage_product_write_table{
+        width: 80%;
+        height: 200px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_product_write_table th{
+        background-color: rgb(240, 239, 239);
+        width: 150px;
+    }
+    .spage_product_write_table input{
+        margin-left: 5px;
+    }
+    .spage_product_write_table input[type=text], .spage_product_write_table input[type=number]{
+        height: 30px;
+    }
+    .spage_product_write_table_image{
+        width: 80%;
+        height: 200px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_product_write_table_image input{
+        margin-left: 5px;
+    }
+    .spage_product_write_table_textarea{
+        margin-left: 30px;
+    }
+    /* 뷰 */
+    .spage_product_write_group_table td>span{
+        width: 120px;
+        height: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    /* 유저 상세 페이지 */
+    .mypage_table_topbox_usertext{
+        font-size: 25px;
+        font-weight: bolder;
+    }
+    .mypage_table_topbox_user_list{
+        font-size: 20px;
+        font-weight: bolder;
+        margin-left: 30px;
+    }
+    .spage_userpage_table{
+        width: 80%;
+        height: 200px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+    }
+    .spage_userpage_table th{
+        background-color: rgb(240, 239, 239);
+        width: 100px;
+    }
+    .spage_userpage_table td>span{
+        margin-left: 5px;
+    }
+    .spage_userpage_table td>input{
+        margin-left: 5px;
+        width: 500px;
+        height: 30px;
+    }
+
+    .spage_userpage_order_table{
+        width: 100%;
+        height: 100px;
+        margin-left: 30px;
+        border : 1px solid black;
+        border-collapse : collapse;
+        text-align: center;
+    }
+    .spage_userpage_order_table th{
+        background-color: rgb(240, 239, 239);
+        height: 50px;
+    }
+
+    .spage_button_box{
+        text-align: center;
+    }
+    .spage_button{
+        width: 50px;
+        height: 30px;
+        margin: 10px;
+    }
+    .spage_button_user_delete{
+        color: red;
+        width: 80px;
+        height: 30px;
+        margin: 10px;
+    }
+    /* 상세페이지 버튼 */
+    .spage_button_box{
+        text-align: center;
+    }
+    .spage_button{
+        width: 50px;
+        height: 30px;
+        margin: 10px;
+    }
+    
+    /* 마이페이지 비밀번호 체크 */
+        #mypage_check {
+        margin-top: 50px;
+        width: 100%;
+        height: 400px;
+        font-size: 35px;
+        color: rgb(110, 104, 104);
+        text-align: center;
+    }
+
+    /* 로그인 입력 박스 */
+    #mypage_check_box{
+        width: 450px;
+        height: 200px;
+        border: 2px rgb(204, 197, 197) solid;
+        border-radius: 15px;
+        font-size: 20px;
+        line-height: 60px;
+        text-align: center;
+        margin: auto;
+    }
+    
+    #mypage_check_submit {
+    width: 120px;
+    height: 60px;
+    background-color: rgb(255, 145, 0);
+    color: white;
+    border: 0px;
+    font-size: 20px;
+    font-weight: bolder;
+    }
+    
+    .mypage_check_input {
+    width: 250px;
+    height: 25px;
+    }
+

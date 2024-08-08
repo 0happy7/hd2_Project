@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- Namespace를 통해 JAVA 클래스와 Annotation클래스와 동기 -->
+<mapper namespace="com.hd.data">
+	<!-- 아이디 중복 체크 -->
+	<select id="checkid" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from user where userid = #{id}
+	</select>
+	<!-- 비밀번호 체크 -->
+	<select id="checkpw" parameterType="com.hd.vo.UserVO" resultType="java.lang.Integer">
+		select count(*) from user where userno = #{userno} and userpw = md5(#{userpw})
+	</select>
+	<!-- 이메일 중복 체크 -->
+	<select id="emailcheck" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from user where email = #{email}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.hd.vo.UserVO" useGeneratedKeys="true" keyProperty="userno">
+		insert into user (userid,userpw,uname,gender,email) values (#{userid}, md5(#{userpw}), #{uname},#{gender},#{email})
+	</insert>
+	<!-- 로그인 -->
+	<select id="login" parameterType="com.hd.vo.UserVO" resultType="com.hd.vo.UserVO">
+		select * from user where userid = #{userid} and userpw = md5(#{userpw}) and isretire = 'N'
+	</select>
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="com.hd.vo.UserVO" resultType="com.hd.vo.UserVO">
+		select * from user where uname = #{uname} and email = #{email} and isretire = 'N'
+	</select>
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="com.hd.vo.UserVO" resultType="com.hd.vo.UserVO">
+		select * from user where userid = #{userid} and uname = #{uname} and email = #{email} and isretire = 'N'
+	</select>
+	<!-- 비밀번호 변경 -->
+	<update id="pwupdate" parameterType="com.hd.vo.UserVO">
+		update user set userpw = md5(#{userpw}) where userno = #{userno}
+	</update>
+	<!-- 이름 변경 -->
+	<update id="nameupdate" parameterType="com.hd.vo.UserVO">
+		update user set uname = #{uname} where userno = #{userno}
+	</update>
+	<!-- 회원번호로 유저정보 가져오기 -->
+	<select id="noselect" parameterType="java.lang.String" resultType="com.hd.vo.UserVO">
+		select * from user where userno = #{userno}
+	</select>
+	<!-- 사용중인 메일 체크 -->
+	<select id="usemailcheck" parameterType="com.hd.vo.UserVO" resultType="java.lang.Integer">
+		select count(*) from user where userno = #{userno} and email = #{email}
+	</select>
+	<!-- 메일 변경 -->
+	<update id="mailupdate" parameterType="com.hd.vo.UserVO">
+		update user set email = #{email} where userno = #{userno}
+	</update>
+	<!-- 유저 탈퇴시키기 -->
+	<update id="userdelete" parameterType="com.hd.vo.UserVO">
+		update user set isretire = 'Y', reason=#{reason}, withdrawaldate = now() where userno = #{userno}
+	</update>
+	
+	<!-- 유저글 가져오기 -->
+	<select id="getuserboard" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.BoardVO">
+		select * from board
+		<choose>
+		<when test='searchname == "I" and keyword != ""'>
+		and userid like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "N" and keyword != ""'>
+		and uname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+		order by userno desc limit #{startno},10
+	</select>
+	<!-- 유저목록 가져오기 -->
+	<select id="userlist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.UserVO">
+		select * from user 
+		<choose>
+		<when test='isretire == "N"'>
+		where isretire = 'N'
+		</when>
+		<when test='isretire == "Y"'>
+		where isretire = 'Y'
+		</when>
+		</choose>
+		
+		<choose>
+		<when test='searchname == "I" and keyword != ""'>
+		and userid like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "N" and keyword != ""'>
+		and uname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+		order by userno desc limit #{startno},10
+	</select>
+	<!-- 유저 카운트 -->
+	<select id="usertotal" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+		select count(*) from user 
+		<choose>
+		<when test='isretire == "N"'>
+		where isretire = 'N'
+		</when>
+		<when test='isretire == "Y"'>
+		where isretire = 'Y'
+		</when>
+		</choose>
+		
+		<choose>
+		<when test='searchname == "I" and keyword != ""'>
+		and userid like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "N" and keyword != ""'>
+		and uname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	
+	<!-- 유저 이름가져오기 -->
+	<select id="getusername" parameterType="java.lang.Integer" resultType="java.lang.String">
+		select uname from user where userno = #{userno}
+	
+	</select>
+	<!-- 관리자 유저 메모 추가 -->
+	<update id="adminupdateuser" parameterType="com.hd.vo.UserVO">
+		update user set adminmemo = #{adminmemo} where userno = #{userno}
+	</update>
+	<!-- 유저 완전 삭제 -->
+	<delete id="userdrop" parameterType="java.lang.String">
+	delete from user where userno = #{no}
+	</delete>
+	<!-- 유저 복구 -->
+	<update id="userrestore" parameterType="java.lang.String">
+		update user set isretire = 'N' where userno = #{no}
+	</update>
+	<!-- 관리자 공지 전체 글 갯수 -->
+	<select id="getnoticetotal" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+		select count(*) from board where bkind = 'N'
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		and bname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "C" and keyword != ""'>
+		and bcontent like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	<!-- 관리자 공지 전체 글 리스트  -->
+	<select id="getnoticelist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.BoardVO">
+		select * from board where bkind = 'N'
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		and bname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "C" and keyword != ""'>
+		and bcontent like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+		order by bno desc limit #{startno},10
+	</select>
+	<!-- 관리자 공지 삭제 (파일) -->
+	<delete id="noticesfiledelete" parameterType="java.lang.String">
+		delete from file where bno = #{no}
+	</delete>
+	<!-- 관리자 공지 삭제 (게시물) -->
+	<delete id="noticedelete" parameterType="java.lang.String">
+		delete from board where bno = #{no}
+	</delete>
+	<!-- 게시판 전체 글 갯수  -->
+	<select id="getboardtotal" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+		select count(*) from board b join user u on b.userno = u.userno
+		where (bkind = 'F' OR bkind = 'T')
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		and bname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "C" and keyword != ""'>
+		and bcontent like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "I" and keyword != ""'>
+		and userid like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	<!-- 게시판 전체 글 리스트  -->
+	<select id="getboardlist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.BoardVO">
+		select * from board b join user u on b.userno = u.userno
+		where (bkind = 'F' OR bkind = 'T')
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		and bname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "C" and keyword != ""'>
+		and bcontent like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "I" and keyword != ""'>
+		and userid like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+		order by bno desc limit #{startno},10
+	</select>
+	<!-- 관리자 게시글 삭제 (파일)  -->
+		<delete id="boardsfiledelete" parameterType="java.lang.String">
+			delete from file where bno = #{no}
+		</delete>
+	<!-- 관리자 게시글 삭제 (게시글)  -->
+		<delete id="boardsdelete" parameterType="java.lang.String">
+			delete from board where bno = #{no}
+		</delete>
+		
+	<!-- 관리자 주문정보 수정 -->	
+	<update id="adminupdateorder" parameterType="com.hd.vo.OrderVO">
+		update ordertable set
+		status = #{status}, deliveryc = #{deliveryc}, trackingno = #{trackingno}, omemo = #{omemo}
+		where orderno = #{orderno}
+	</update>
+	<!-- 상품 관련 -->
+	<!-- 상품 등록 -->
+<insert id="writeitem" parameterType="com.hd.vo.ItemVO" useGeneratedKeys="true" keyProperty="itemno">
+	insert into item 
+	(iuserno, category, icode, iname, maker, price, stockSet, stock, thumbnailF, thumbnailP, icontent,entityid, shippingfee) 
+	values 
+	(#{iuserno}, #{category}, #{icode}, #{iname}, #{maker}, #{price}, #{stockSet}, #{stock}, #{thumbnailF}, #{thumbnailP}, #{icontent}, 2, #{shippingfee})
+</insert>
+
+<insert id="upload" parameterType="com.hd.vo.FileVO">
+	insert into file (entityid, bfname, bpname, fitemno) values (#{entityid}, #{bfname}, #{bpname}, #{fitemno})
+</insert>
+
+	<!-- 아이템번호로 아이템정보 가져오기 -->
+	<select id="getitem" parameterType="java.lang.String" resultType="com.hd.vo.ItemVO">
+		select * from item where itemno = #{itemno}
+	</select>
+
+	<!-- 아이템 카운트 -->
+	<select id="itemtotal" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+	    select count(*) from item
+	    <where>
+	        <choose>
+	            <when test='category == "F"'>
+	                category = 'F'
+	            </when>
+	            <when test='category == "I"'>
+	                category = 'I'
+	            </when>
+	            <when test='category == "C"'>
+	                category = 'C'
+	            </when>
+	            <otherwise>
+	                1 = 1
+	            </otherwise>
+	        </choose>
+	        
+	        <if test='searchname == "N" and keyword != ""'>
+	            and iname like CONCAT('%', #{keyword}, '%')
+	        </if>
+	        <if test='searchname == "C" and keyword != ""'>
+	            and icode like CONCAT('%', #{keyword}, '%')
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="getitemlistshop" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.ItemVO">
+		select * from item
+	    <where>
+	        <choose>
+	            <when test='category == "F"'>
+	                category = 'F'
+	            </when>
+	            <when test='category == "I"'>
+	                category = 'I'
+	            </when>
+	            <when test='category == "C"'>
+	                category = 'C'
+	            </when>
+	            <otherwise>
+	                1 = 1
+	            </otherwise>
+	        </choose>
+	        <if test='searchname == "N" and keyword != ""'>
+	            and iname like CONCAT('%', #{keyword}, '%')
+	        </if>
+	    </where>
+	    order by itemno desc limit #{sstartno}, #{pagesize}
+	</select>
+	<!-- 전체목록 가져오기 -->
+	<select id="getitemlistshopall" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.ItemVO">
+		select * from item
+	    <where>
+	        <choose>
+	            <when test='category == "F"'>
+	                category = 'F'
+	            </when>
+	            <when test='category == "I"'>
+	                category = 'I'
+	            </when>
+	            <when test='category == "C"'>
+	                category = 'C'
+	            </when>
+	            <otherwise>
+	                1 = 1
+	            </otherwise>
+	        </choose>
+	    </where>
+	    order by itemno desc
+	</select>
+	
+	<!-- 아이템목록 가져오기 -->
+	<select id="itemlist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.ItemVO">
+		select * from item 		
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		where iname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "C" and keyword != ""'>
+		where icode like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+		order by itemno desc limit #{startno},10
+	</select>
+	
+	<select id="getfilelist" parameterType="java.lang.String" resultType="com.hd.vo.FileVO">
+		select * from file where fitemno = #{itemno}
+	</select>
+	
+	<update id="updateitem" parameterType="com.hd.vo.ItemVO" useGeneratedKeys="true" keyProperty="itemno">
+		update item set category = #{category}, icode = #{icode}, iname = #{iname},
+		maker = #{maker},price = #{price},stockSet = #{stockSet},stock = #{stock},
+		<choose>
+		<when test='thumbnailF != null'>
+		thumbnailF = #{thumbnailF},thumbnailP = #{thumbnailP},
+		</when>
+		</choose>
+		icontent = #{icontent} where itemno = #{itemno}
+	</update>
+	
+	<delete id="itemupdatefiledel" parameterType="java.lang.Integer">
+	delete from file where fitemno = #{fitemno}
+	</delete>
+	
+	<delete id="itemdrop" parameterType="java.lang.String">
+	delete from item where itemno = #{itemno}
+	</delete>
+	
+	<insert id="writereview" parameterType="com.hd.vo.ReviewVO" useGeneratedKeys="true" keyProperty="reviewno">
+	insert into review (reitemno, reuserno, rate, recontent) values (#{reitemno}, #{reuserno}, #{rate}, #{recontent})
+	</insert>
+	
+	<select id="getreview" parameterType="java.lang.Integer" resultType="com.hd.vo.ReviewVO">
+		select r.*, u.uname as name from
+		review r join user u on r.reuserno = u.userno
+		where r.reviewno = #{no}
+	</select>
+	
+	<select id="reviewlist" parameterType="java.lang.String" resultType="com.hd.vo.ReviewVO">
+		select r.*, u.uname as name from
+		review r join user u on r.reuserno = u.userno
+		where r.reitemno = #{itemno}
+	</select>
+	
+	<update id="updaterating" parameterType="java.lang.Integer">
+		update item set rating = (select round(avg(rate),1) from review where reitemno = #{no})
+		where itemno = #{no};
+	</update>
+	
+	<delete id="deletereview" parameterType="java.lang.String">
+	delete from review where reviewno = #{no}
+	</delete>
+	
+	<insert id="addrsave">
+	insert into addr (dname,auserno,addrname,addrtel,addr,addrdetail,req,def)
+	values (#{dname},#{auserno},#{addrname},#{addrtel},#{addr},#{addrdetail},#{req},#{def})
+	</insert>
+	
+	<update id="addrdefset">
+		update addr set def = "N"
+	</update>
+	
+	<select id="getaddrlist" parameterType="java.lang.String" resultType="com.hd.vo.AddrVO">
+		select * from addr where auserno = #{no}
+	</select>
+	
+	<!-- 결제 후 -->
+	<insert id="orderwrite" parameterType="com.hd.vo.OrderVO" useGeneratedKeys="true" keyProperty="orderno">
+	insert into ordertable (ordernum,ouserno,oitemno,status,tprice,oitemcnt,oaddrname,oaddrtel,oaddr,oaddrdetail,oreq)
+	values (#{ordernum},#{ouserno},#{oitemno},#{status},#{tprice},#{oitemcnt},#{oaddrname},#{oaddrtel},#{oaddr},#{oaddrdetail},#{oreq})
+	</insert>
+	
+	<insert id="paywrite" parameterType="com.hd.vo.PayVO">
+	insert into pay (porderno,puserno,payment,payprice,cardcom,installment)
+	values (#{porderno},#{puserno},#{payment},#{payprice},#{cardcom},#{installment})
+	</insert>
+	
+	<select id="getorder" parameterType="java.lang.String" resultType="com.hd.vo.OrderVO">
+		select * from ordertable where orderno = #{orderno}
+	</select>
+	
+	<select id="getpay" parameterType="java.lang.String" resultType="com.hd.vo.PayVO">
+		select * from pay where porderno = #{orderno}
+	</select>
+	
+	<select id="getuserinfo" parameterType="java.lang.Integer" resultType="com.hd.vo.UserVO">
+		select * from user where userno = #{no}
+	</select>
+	
+	
+	<update id="updateitemcnt" parameterType="com.hd.vo.OrderVO">
+		update item set stock = stock - #{oitemcnt} where itemno = #{oitemno}
+	</update>
+	
+	<select id="getitemcnt" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select stock from item where itemno = #{oitemno}
+	</select>
+	<update id="updatestockset" parameterType="java.lang.Integer">
+		update item set stockSet = 'N' where itemno = #{oitemno}
+	</update>
+	
+	
+	<!-- 유저 주문목록 가져오기 -->
+	<!-- 전체 주문 수 -->
+	<select id="getordertotal" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+		select count(*) from ordertable o join item i on o.oitemno = i.itemno join pay p on p.porderno = o.orderno
+		where ouserno = #{suserno}
+		<choose>
+		<when test='searchname == "O" and keyword != ""'>
+		and ordernum like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "P" and keyword != ""'>
+		and iname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	<!-- 전체 주문 리스트 -->
+	<select id="getorderlist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.OrderVO">
+		select orderno, ordernum, iname, price, oitemcnt, payprice as lpayprice, paydate, status, deliveryc, trackingno
+		from ordertable o join item i on o.oitemno = i.itemno join pay p on p.porderno = o.orderno
+		where ouserno = #{suserno}
+		<choose>
+		<when test='searchname == "O" and keyword != ""'>
+		and ordernum like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "P" and keyword != ""'>
+		and iname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	
+	<!-- 전체 주문 수 관리자 -->
+	<select id="getordertotala" parameterType="com.hd.vo.SearchVO" resultType="java.lang.Integer">
+		select count(*) from ordertable o join item i on o.oitemno = i.itemno join pay p on p.porderno = o.orderno
+		join user u on u.userno = o.ouserno
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		where uname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "O" and keyword != ""'>
+		where ordernum like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "P" and keyword != ""'>
+		where iname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+		<!-- 전체 주문 리스트 관리자 -->
+	<select id="getorderlista" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.OrderVO">
+		select orderno, odate, ordernum, uname, iname, price, oitemcnt, payprice as lpayprice,payment,status
+		from ordertable o join item i on o.oitemno = i.itemno join pay p on p.porderno = o.orderno
+		join user u on u.userno = o.ouserno
+		<choose>
+		<when test='searchname == "N" and keyword != ""'>
+		where uname like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "O" and keyword != ""'>
+		where ordernum like CONCAT('%', #{keyword}, '%')
+		</when>
+		<when test='searchname == "P" and keyword != ""'>
+		where iname like CONCAT('%', #{keyword}, '%')
+		</when>
+		</choose>
+	</select>
+	
+		<!-- 인덱스용 아이템목록 가져오기 -->
+	<select id="indexitemlist" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.ItemVO">
+		select * from item where
+	        <choose>
+	            <when test='category == "F"'>
+	                category = 'F'
+	            </when>
+	            <when test='category == "I"'>
+	                category = 'I'
+	            </when>
+	            <when test='category == "C"'>
+	                category = 'C'
+	            </when>
+	        </choose>
+		order by itemno desc limit 12
+	</select>
+	
+	<!-- 
+		board 관련 
+	-->
+	<insert id="insert" parameterType="com.hd.vo.BoardVO" useGeneratedKeys="true" keyProperty="bno">
+	    insert into board (userno, bkind, name, bname, addr, area, tel, tel1, tel2, btime1, btime2, bcontent)
+	    values (#{userno}, #{bkind}, #{name}, #{bname}, #{addr}, #{area}, #{tel}, #{tel1}, #{tel2}, #{btime1},  #{btime2}, #{bcontent}
+	    )
+	</insert>
+	
+	<insert id="insertFiles" parameterType="java.util.List">
+	    insert into file (bno, bfname, bpname)
+	    values
+	    <foreach collection="list" item="file" separator=",">
+	        (#{file.bno}, #{file.bfname}, #{file.bpname})
+	    </foreach>
+	    <if test="list == null or list.isEmpty()">
+	        (null, null, null)
+	    </if>
+	</insert>
+		
+	
+	<select id="view" parameterType="String" resultType="com.hd.vo.BoardVO">
+	    select bno, userno, bkind, name, bname, addr, area, tel, tel1, tel2, btime1, btime2, bcontent, bhit, bwdate
+	    from board 
+	    where bno = #{ bno }
+	</select>
+	
+	<select id="viewfile" parameterType="java.lang.String" resultType="com.hd.vo.FileVO">
+	    select fid, bno, bfname, bpname
+		from file
+	    where bno = #{ no }
+	</select>
+	
+	
+	<update id="hit" parameterType="java.lang.String">
+		update board set bhit = bhit + 1 where bno = #{ no }
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from board where bno = #{ no }
+	</delete>
+	
+	<update id="update" parameterType="com.hd.vo.BoardVO">
+	    update board set 
+	    bname = #{bname},
+	    addr = #{addr},
+	    area = #{area},
+	    tel =  #{tel},
+	    tel1 = #{tel1},
+	    tel2 = #{tel2},
+	    btime1 = #{btime1},
+	    btime2 = #{btime2},
+	    bcontent = #{bcontent} 
+	    where bno = #{bno}
+	</update>
+	
+	<update id="updateFile" parameterType="com.hd.vo.FileVO">
+	    UPDATE file
+	    SET bfname = #{bfname},
+	        bpname = #{bpname}
+	    WHERE fid = #{fid}
+	</update>
+	
+	<!-- mapper.xml -->
+	<delete id="deleteFilesByBoardNo" parameterType="String">
+	    DELETE FROM file WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 게시글 번호를 기준으로 파일 목록 조회 -->
+	<select id="getFileListByBoardNo" parameterType="String" resultType="com.hd.vo.FileVO">
+	    SELECT * FROM file
+	    WHERE bno = #{bno}
+	</select>
+	
+	
+	<insert id="reply_insert" parameterType="com.hd.vo.ReplyVO" useGeneratedKeys="true" keyProperty="rno">
+		insert into reply (bno, ruserno, rcontent) values (#{ bno }, #{ ruserno }, #{ rcontent })
+	</insert>
+	
+	<select id="reply_list" parameterType="java.lang.String" resultType="com.hd.vo.ReplyVO">
+		select rno, ruserno, rcontent, date(rwdate) as rwdate,
+		(select uname from user where userno = reply.ruserno) as runame
+		from reply
+		where bno = #{ no } order by rno desc
+	</select>
+	
+	<delete id="reply_delete" parameterType="java.lang.String">
+		delete from reply where rno = #{ rno }
+	</delete>
+	<select id="total" parameterType="com.hd.vo.BSearchVO" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS total
+	    FROM board
+	    WHERE
+	        bkind = #{kind}  -- 게시물 종류 조건
+	        AND
+	        (
+	            (#{area} = '전체') OR (area = #{area})  -- 지역 조건 (전체일 경우는 선택된 지역 무시)
+	        )
+	        AND (
+	            (#{sena} = '작성자' AND name LIKE CONCAT('%', #{keyword}, '%'))  -- 작성자 검색일 경우
+	            OR (#{sena} = '내용' AND bcontent LIKE CONCAT('%', #{keyword}, '%'))  -- 내용 검색일 경우
+	            OR (#{sena} = '')  -- 검색 이름이 선택되지 않았을 경우
+	            OR (#{keyword} = '')  -- 키워드가 입력되지 않았을 경우
+	        )
+	</select>
+	<select id="ntotal" parameterType="com.hd.vo.BSearchVO" resultType="java.lang.Integer">
+		select count(*) from board where bkind = #{ kind }
+	</select>	
+	
+	<!--
+	<select id="list" parameterType="com.hd.vo.SearchVO" resultType="com.hd.vo.BoardVO" >
+		select bno, userno, bkind, bname, addr, date(bwdate) as bwdate, bhit, (select name from user where userno = board.userno) as name,
+		(select count(*) from reply where bno = board.bno) as rcount 
+		from board		
+		where bkind = #{ kind } order by bno desc limit #{ startno }, 8
+	</select>
+	-->
+	
+	<!-- <select id="list" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO">
+	    SELECT b.bno, b.userno, b.bkind, b.bname, b.addr, DATE(b.bwdate) AS bwdate, b.tel, b.tel1, b.tel2, b.bhit,
+	           (SELECT u.uname FROM user u WHERE u.userno = b.userno) AS name,
+	           (SELECT COUNT(*) FROM reply WHERE bno = b.bno) AS rcount,
+	           f.fid, f.bfname, f.bpname
+	    FROM board b
+	    LEFT JOIN file f ON b.bno = f.bno
+	    WHERE b.bkind = #{kind}
+	    <if test="area != '전체'">
+	        AND b.area = #{area}
+	    </if>
+	    <if test="sena == '작성자'">
+        	AND b.name LIKE concat('%', #{keyword}, '%')
+	    </if>
+	    <if test="sena == '내용'">
+	        AND b.bcontent LIKE concat('%', #{keyword}, '%')
+	    </if>
+	    ORDER BY b.bno DESC
+	    LIMIT #{startno}, 8
+	</select> -->
+	
+	<select id="list" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO">
+    SELECT b.bno, b.userno, b.bkind, b.bname, b.addr, DATE(b.bwdate) AS bwdate, b.tel, b.tel1, b.tel2, b.bhit,
+           (SELECT u.uname FROM user u WHERE u.userno = b.userno) AS name,
+           (SELECT COUNT(*) FROM reply WHERE bno = b.bno) AS rcount,
+           (SELECT f.fid FROM file f WHERE f.bno = b.bno ORDER BY f.fid LIMIT 1) AS fid,
+           (SELECT f.bfname FROM file f WHERE f.bno = b.bno ORDER BY f.fid LIMIT 1) AS bfname,
+           (SELECT f.bpname FROM file f WHERE f.bno = b.bno ORDER BY f.fid LIMIT 1) AS bpname
+    FROM board b
+    WHERE b.bkind = #{kind}
+    <if test="area != '전체'">
+        AND b.area = #{area}
+    </if>
+    <if test="sena == '작성자'">
+        AND b.name LIKE concat('%', #{keyword}, '%')
+    </if>
+    <if test="sena == '내용'">
+        AND b.bcontent LIKE concat('%', #{keyword}, '%')
+    </if>
+    ORDER BY b.bno DESC
+    LIMIT #{startno}, 8
+</select>
+	
+	<select id="nlist" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO" >
+		select bno, userno, bkind, bname, date(bwdate) as bwdate, bhit, (select name from user where userno = board.userno) as name
+		from board		
+		where bkind = #{ kind } order by bno desc limit #{ startno }, 10
+	</select>
+	
+	<!--
+	<select id="ilist" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO" >
+		select bno, bkind, bname, area, addr, tel, tel1, tel2
+		from board		
+		where bkind = #{ kind } and addr like concat('%', #{area}, '%')
+		order by bno desc limit #{ startno }, 2
+	</select>
+	-->
+	<select id="ilist" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO">
+		SELECT b.bno, b.bkind, b.bname, b.area, b.addr, b.tel, b.tel1, b.tel2,
+		(SELECT f.bpname FROM file f WHERE f.bno = b.bno ORDER BY f.fid LIMIT 1) AS bpname
+		FROM board b
+		WHERE b.bkind = #{kind}
+		  AND b.addr LIKE CONCAT('%', #{area}, '%')
+		ORDER BY b.bno DESC
+		LIMIT #{startno}, 2
+	</select>
+	
+	<select id="iflist" parameterType="com.hd.vo.ItemVO" resultType="com.hd.vo.BoardVO">
+	SELECT itemno, category, thumbnailF, thumbnailP
+	FROM item
+	WHERE category = #{ category }
+	</select>
+	
+	<select id="unamegetlist" parameterType="com.hd.vo.BSearchVO" resultType="com.hd.vo.BoardVO">
+	select * from board where userno = #{buserno}
+	<if test="sena == 'sena01'">
+        AND bname LIKE concat('%', #{keyword}, '%')
+    </if>
+    <if test="sena == 'sena02'">
+        AND bcontent LIKE concat('%', #{keyword}, '%')
+    </if>
+	order by bno desc limit #{ startno }, 10
+	</select>
+	<select id="unamegettotal" parameterType="com.hd.vo.BSearchVO" resultType="java.lang.Integer">
+	select count(*) from board where userno = #{buserno}
+	<if test="sena == 'sena01'">
+        AND bname LIKE concat('%', #{keyword}, '%')
+    </if>
+    <if test="sena == 'sena02'">
+        AND bcontent LIKE concat('%', #{keyword}, '%')
+    </if>
+	</select>
+	
+	
+	
+</mapper>

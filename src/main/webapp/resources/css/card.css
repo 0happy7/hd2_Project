@@ -1,0 +1,28 @@
+#container {
+margin:0px 0px 0px 10px;
+max-width:1200px; 
+width: 1200px;
+transform: translate(0%, 10%);
+
+}
+
+/* 카드인증 전체너비,여백 */
+table
+{
+    background-color:white;
+    border : solid 1px darkgrey;
+    border-collapse: collapse;
+    font-size: 22px;
+    
+}
+
+/* 주문상품 정보 내부 테두리,여백*/
+td
+{
+    border: 1px solid darkgray; 
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}

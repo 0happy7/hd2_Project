@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/* 초기화 */
+* {
+	margin: 0; /* 마진 리셋 */
+	padding: 0; /* 패딩 리셋 */
+	box-sizing: border-box; /* 박스 영역은 테두리까지 */
+}
+
+body {
+	margin: 0 auto; /* 화면 중앙에 배치 */
+	width: 1200px; /*너비*/
+}
+/* 상단 로고, 로그인 css  */
+#main_title {
+	text-align: center;
+	font-size: 40px;
+	font-weight: bolder;
+}
+
+#main_title_a {
+	text-decoration: none;
+	color: rgb(255, 138, 5);
+}
+
+#menu {
+	text-align: right;
+	margin-right: 30px;
+}
+
+#login, #join, #mypage, #logout {
+	display: inline-block;
+	background-color: rgb(226, 217, 217);
+	width: 110px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	margin: 3px;
+}
+
+#login_menu a, #loout_menu a {
+	color: black;
+}
+
+/* 메뉴바 css */
+#menubar {
+	width: 100%;
+	height: 70px;
+	background-color: rgb(165, 78, 165);
+}
+
+#menubar a {
+	text-decoration: none;
+	color: white;
+	font-weight: bolder;
+}
+
+#menubar a:hover {
+	color: yellow;
+}
+
+#menubar>ul>li {
+	float: left;
+	width: 25%;
+	height: 50px;
+	line-height: 45px;
+	text-align: center;
+	font-size: 25px;
+}
+
+#menubar ul ul {
+	display: none;
+}
+
+#menubar ul li:hover ul {
+	display: block;
+}
+
+.submenu {
+	position: absolute;
+	overflow: hidden;
+	transition: height .2s;
+	width: 574px;
+}
+
+.submenuLink {
+	/* 하위 메뉴의 a 태그의 마우스 오버 스타일 설정 */
+	float: left;
+	width: 20%;
+	line-height: 20px;
+	color: white;
+	font-weight: bolder;
+	font-size: 20px;
+}
+
+.submenuLink:hover {
+	/* 하위 메뉴의 a 태그의 마우스 오버 스타일 설정 */
+	color: yellow;
+}
+
+#menubar li {
+	list-style: none;
+}
+
+/* 꼬릿말 css */
+#tail {
+	text-align: right;
+}

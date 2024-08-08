@@ -1,0 +1,207 @@
+a.gunsan.position 
+    {
+        left: 120px;
+        top: 74px;
+    }
+    a.gunsan.position:hover 
+    {
+        left: 120px;
+        top: 54px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }      
+    a.iksan.position 
+    {
+        left: 220px;
+        top: 40px;
+    }
+    a.iksan.position:hover 
+    {
+        left: 220px;
+        top: 20px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.wanjoo.position 
+    {
+        left: 312px;
+        top: 70px;
+    }
+    a.wanjoo.position:hover 
+    {
+        left: 312px;
+        top: 50px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.jinan.position 
+    {
+        left: 383px;
+        top: 140px;
+    }
+    a.jinan.position:hover 
+    {
+        left: 383px;
+        top: 120px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.muju.position 
+    {
+        left: 500px;
+        top: 84px;
+    }
+    a.muju.position:hover 
+    {
+        left: 500px;
+        top: 64px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.jangsu.position 
+    {
+        left: 437px;
+        top: 220px;
+    }
+    a.jangsu.position:hover 
+    {
+        left: 437px;
+        top: 200px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.namwon.position 
+    {
+        left: 388px;
+        top: 344px;
+    }
+    a.namwon.position:hover 
+    {
+        left: 388px;
+        top: 324px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.sunchang.position 
+    {
+        left: 277px;
+        top: 354px;
+    }
+    a.sunchang.position:hover 
+    {
+        left: 277px;
+        top: 334px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.imsil.position 
+    {
+        left: 305px;
+        top: 264px;
+    }
+    a.imsil.position:hover 
+    {
+        left: 305px;
+        top: 244px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.jeongeup.position 
+    {
+        left: 182px;
+        top: 247px;
+    }
+    a.jeongeup.position:hover 
+    {
+        left: 182px;
+        top: 227px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.kimje.position 
+    {
+        left: 175px;
+        top: 143px;
+    }
+    a.kimje.position:hover 
+    {
+        left: 175px;
+        top: 123px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.jeonju.position 
+    {
+        left: 270px;
+        top: 140px;
+    }
+    a.jeonju.position:hover 
+    {
+        left: 270px;
+        top: 120px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.buan.position 
+    {
+        left: 84px;
+        top: 218px;
+    }
+    a.buan.position:hover 
+    {
+        left: 84px;
+        top: 198px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.gochang.position 
+    {
+        left: 60px;
+        top: 335px;
+    }
+    a.gochang.position:hover 
+    {
+        left: 60px;
+        top: 315px;
+        width: 40px;
+        height: 47px;
+        background: url("../img/sp_icon.png")no-repeat -460px -137px;
+        background-size: 520px 1500px;        
+    }
+    a.position 
+    {
+        position: absolute;
+        top: 0;
+        display: block;
+        width: 25px;
+        height: 30px;
+        background: url("../img/sp_icon.png") no-repeat -327px -165px;
+        background-size: 520px 1500px;
+    }      
+    

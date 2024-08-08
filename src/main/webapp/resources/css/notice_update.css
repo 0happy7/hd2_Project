@@ -1,0 +1,94 @@
+@charset "UTF-8";
+/* 공통 영역 */
+	body {
+	   margin: 0 auto;  /* 화면 중앙에 배치 */
+	   width:1200px;    /*너비*/
+	}
+/* 메인 영역의 헤더 : 어떤 게시판인지 또는 어떤 기능을 하는 곳인지 표시 */
+#head {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
+    color: rgb(110, 104, 104);
+    border-bottom: 1px rgb(196, 190, 190) solid;
+    padding: 1%;
+}
+
+#head > a {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* 메인 영역 */
+#main {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* 공지사항 수정 : notice_update.html */
+    /* 글수정 테이블 폼 */
+    #notice_update_table {
+        width: 90%;
+        height: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* 테이블 첫번째 td 속성 */
+    .notice_update_table_td{
+        background-color: rgb(241, 235, 235);
+        color: black;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bolder;
+        width: 20%;
+        position: sticky;
+        left: 0;
+        z-index: 99;
+    }
+    
+    /* 제목 입력폼 */
+    #no_title{
+        width: 98%;
+        height: 40px;
+        margin-left: 5px;
+    }
+
+    /* 작성자 입력폼 */
+    #writer{
+        width: 80%;
+        height: 40px;
+        margin-left: 5px;
+        border: 0;
+        font-size: 13px;
+        font-weight: bolder;
+    }
+
+    /* 내용 입력폼 (textarea) */
+    #content {
+        margin-left: 5px;
+        width: 98%;
+        height: 95%;
+    }
+
+    /* 하단 버튼 박스 */
+    #notice_update_button{
+        text-align: right;
+        margin-right: 50px;
+    }
+
+    /* 하단 버튼 속성 */
+    .notice_update{
+        width: 100px;
+        height: 40px;
+        background-color: rgb(235, 231, 231);
+        color: black;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bolder;
+        border: 0;
+    }
+    .notice_update:active{
+        background-color: rgb(185, 184, 184);
+    }

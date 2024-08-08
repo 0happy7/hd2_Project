@@ -1,0 +1,121 @@
+@charset "UTF-8";
+/* 공통 영역 */
+	body {
+	   margin: 0 auto;  /* 화면 중앙에 배치 */
+	   width:1200px;    /*너비*/
+	}
+/* 메인 영역의 헤더 : 어떤 게시판인지 또는 어떤 기능을 하는 곳인지 표시 */
+#head {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
+    color: rgb(110, 104, 104);
+    border-bottom: 1px rgb(196, 190, 190) solid;
+    padding: 1%;
+}
+
+#head > a {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+/* 메인 영역 */
+#main {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* 맛집 게시판 글쓰기 : food_write.html */
+
+/* 글쓰기 테이블 폼 */
+#food_write_table {
+    width: 90%;
+    height: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 테이블 첫번째 td 속성 */
+.food_write_table_td{
+    background-color: rgb(241, 235, 235);
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
+    width: 20%;
+    position: sticky;
+    left: 0;
+    z-index: 99;
+}
+
+/* 맛집명 입력폼 */
+#bname{
+    width: 98%;
+    height: 40px;
+    margin-left: 5px;
+}
+
+/* 주소 찾기 버튼 */
+#addrsearch{
+    width: 90px;
+    height: 45px;
+    border: 0;
+    background-color: rgb(235, 231, 231);
+    margin-left: 5px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+#addrsearch:active{
+    background-color: rgb(185, 184, 184);
+}
+
+ /* 주소 입력폼 */
+#addr{
+    width: 80%;
+    height: 40px;
+}
+
+ /* 전화번호, 영업시간 입력폼 */
+#food_tel{
+	width: 70px;
+    height: 30px;
+    margin-left: 5px;
+    text-align: center;
+}
+ 
+#food_time{
+    width: 130px;
+    height: 40px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+ /* 내용 입력폼 (textarea) */
+#bcontent {
+    margin-left: 5px;
+    width: 98%;
+    height: 95%;
+}
+
+/* 하단 버튼 박스 */
+#food_write_button{
+    text-align: right;
+    margin-right: 50px;
+}
+
+/* 하단 버튼 속성 */
+.food_write{
+    width: 100px;
+    height: 40px;
+    background-color: rgb(235, 231, 231);
+    color: black;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bolder;
+    border: 0;
+}
+.food_write:active{
+    background-color: rgb(185, 184, 184);
+}

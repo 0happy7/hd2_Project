@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#container {
+   margin:0 auto;  /* 화면 중앙에 배치 */
+   width:1200px;    /*너비*/
+}
+
+table
+{
+    border-spacing: 0px;
+    /* border-style: none; */
+    padding: 0px;
+}
+td
+{
+	border:1px solid black;
+    /* border-style: none; */
+    text-align:center;
+    padding:10px;
+}
+a
+{
+	text-decoration-line:none;
+}

@@ -1,0 +1,38 @@
+#container {
+    margin:0px 0px 0px 40px;
+    max-width:1200px; 
+    width: 1200px;
+    transform: translate(0%, 10%);
+}
+
+/* 핸드폰결제 전체너비,여백 */
+table
+{
+    background-color:white;
+    border : solid 1px darkgrey;
+    border-collapse: collapse;
+    font-size: 22px;
+    
+}
+
+/* 핸드폰결제 내부 테두리,여백*/
+td
+{
+    border: 1px solid darkgray; 
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+#row1
+{
+    background-color: rgb(135, 163, 199);
+    color: aliceblue;
+    font-weight: bold;
+}
+.btn:focus {
+    background:rgb(255, 255, 255);
+    color: black;
+    border: 1 solid black;
+}

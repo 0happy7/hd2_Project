@@ -1,0 +1,104 @@
+/* 컨테이너 */
+/* 메인 영역의 헤더 : 어떤 게시판인지 또는 어떤 기능을 하는 곳인지 표시 */
+#head {
+    margin-top: 40px;
+    margin-bottom: 2%;
+    text-align: center;
+    font-size: 35px;
+    color: rgb(110, 104, 104);
+    border-bottom: 1px rgb(196, 190, 190) solid;
+    padding: 1%;
+}
+/* 메인 영역 */
+#main {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+  /* 주문완료 전체너비,여백 */
+table
+{
+	margin:auto;
+    align-self: center;
+    border : solid 1px darkgrey;
+    border-collapse: collapse;
+    width: 700px;
+    font-size: 25px;
+}
+
+/* 주문상품 정보 내부 테두리,여백*/
+td
+{
+    
+    border: 1px solid darkgray; 
+    padding: 5px;
+    width: 400px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+tr
+{
+    
+}
+
+/* 각 행 너비,높이 */
+#row1
+{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+#row1 > span
+{
+    margin-left: 30px;
+}
+
+#row2, #row3, #row4, #row5
+{
+    height: 100px;
+    text-align: center;
+    
+}
+
+#row2
+{
+    border-top: 1px solid darkgray;
+}
+
+
+#row3
+{
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+#row3 > div
+{
+    background-color:lightblue;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#row3 > div > span
+{
+   color: red;
+}
+
+#row4 > span
+{
+    color: red;
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+#row5
+{
+   border-bottom: 1px solid darkgray;
+}
+

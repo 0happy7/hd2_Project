@@ -1,0 +1,150 @@
+/* 컨테이너 */
+.container {
+    margin:0 auto;  
+    max-width:1200px;    
+    width: 1200px;
+  }
+
+  /* 배송지 정보 */
+.directInfo, .existingInfo  
+{
+    border-collapse: collapse;
+    width: 700px;
+    height: 400px;
+    font-size: 20px;
+    font-weight: bolder;
+    float: left;
+}
+/* 배송지 정보 내부 테두리,여백*/
+.info
+{
+    border: 1px solid darkgray; 
+    padding: 10px;
+}
+
+
+select
+{
+    width: 400px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+/* 결제금액 상자 */
+.pay
+{
+    border: 1px solid darkgray;
+    border-collapse: collapse;
+    width: 300px;
+    height: 400px;
+    font-size: 20px;
+    font-weight: bolder;
+    float: left;
+    margin-left: 170px;
+    
+}
+
+/* 결제금액 상자 스티키 고정 */
+#pay
+{
+    position: sticky;
+    top: 100px;
+}
+
+p
+{
+    text-align: center;
+}
+
+/* 결제하기 버튼 */
+#btn1{
+    width: 270px;
+    height: 50px;
+    font-size:30px;
+    font-family:sans-serif;
+    line-height: 50px;
+    text-align: center;
+    background: red;
+    color: black;
+    margin: auto;
+    border-radius: 12px;
+  }
+#btn2, #btn3, .payBtn{
+    width: 270px;
+    height: 50px;
+    font-size:30px;
+    font-family:sans-serif;
+    line-height: 50px;
+    text-align: center;
+    border: 2px solid red;
+    margin: auto;
+    border-radius: 12px;
+    color: black;
+    background: red;
+    text-decoration: none;
+    float: left;
+    margin:0px 20px 20px 20px;
+}
+
+#btn1:hover{
+background-color: red;
+color: white;
+
+} 
+#btn2:hover{
+background-color: white;
+color: black;
+}
+
+#btn3:hover {
+background-color: red;
+color: white;
+}
+
+/* 결제수단 선택 */
+#choose_Pay   
+{
+    border-collapse: collapse;
+    width: 700px;
+    height: 20px;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: bolder;
+
+
+}
+/* 결제수단 선택 내부테두리,여백 */
+.choose_Pay
+{
+    border: 1px solid darkgray; 
+    padding: 10px;
+    border-left: none;
+    border-right: none;
+}
+
+#agree   
+{
+    border-collapse: collapse;
+    width: 700px;
+    height: 20px;
+    line-height: 40px;
+    font-size: 23px;
+    font-weight: bolder;
+}
+
+/* 결제수단 선택 내부테두리,여백 */
+.agree_ck
+{
+    border: 1px solid darkgray; 
+    padding: 5px;
+    border-left: none;
+    border-right: none;
+}
+
+/* 라디오버튼 크기 */
+input[type=radio]
+{
+    width: 20px;
+    height: 20px;
+    border: 1px;
+}
